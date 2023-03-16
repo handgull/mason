@@ -32,6 +32,12 @@ Uses the default Django development server.
 
     Test it out at [http://localhost:8000](http://localhost:8000). The "app" folder is mounted into the container and your code changes apply automatically.
 
+> If you don't run manage.py from the image it will use both sqlite and postgres
+```sh
+$ sudo docker exec -it <ID> /bin/sh
+$ python manage.py makemigrations # for example
+```
+
 ### Production
 
 Uses gunicorn + nginx.
