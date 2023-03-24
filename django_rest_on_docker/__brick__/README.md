@@ -10,6 +10,7 @@ instructions to create the venv (for the linter) with all the needed packages:
 $ python3 -m venv env
 $ source env/bin/activate
 $ pip install -r app/requirements.txt
+$ pip install -r app/requirements.dev.txt
 ```
 other instructions:
 ```sh
@@ -32,10 +33,14 @@ Uses the default Django development server.
 
     Test it out at [http://localhost:8000](http://localhost:8000). The "app" folder is mounted into the container and your code changes apply automatically.
 
-> If you don't run manage.py from the image it will use both sqlite and postgres
+> If you don't run manage.py from the image it will use sqlite
 ```sh
 $ sudo docker exec -it <ID> /bin/sh
 $ python manage.py makemigrations # for example
+```
+or
+```sh
+$ sudo docker-compose run --rm web sh -c "python manage.py makemigrations"
 ```
 
 ### Production
@@ -64,3 +69,14 @@ $ sudo docker exec -it <ID> /bin/sh
 
 ### (develop) Admin user
 The Docker develop images comes with a built-in admin user named: admin, the password is admin
+
+### (develop) running the linter from terminal (useful in CI contexts)
+```sh
+$ sudo docker-compose run --rm web sh -c "flake8"
+```
+
+### how to run the tests
+```sh
+$ sudo docker-compose run --rm web sh -c "python manage.py test"
+```
+> Please, make sure every tests folder has the __ init __.py file in it or the tests will be not founded

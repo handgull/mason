@@ -35,15 +35,10 @@ vars:
     description: Secret key
     default: changeme
     prompt: Choose a secret key for prod?
-  cors_dev:
-    type: string
-    description: Allowed dev cors list
-    default: .gitignore
-    prompt: Enter the dev allowed cors list (separated by a space)
   cors_prod:
     type: string
     description: Allowed prod cors list
-    default: .gitignore
+    default: 'http://localhost:8080 http://127.0.0.1:8080'
     prompt: Enter the prod allowed cors list (separated by a space)
   gitignore:
     type: string
